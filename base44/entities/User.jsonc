@@ -1,0 +1,103 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "user",
+        "analyst",
+        "operator",
+        "gov"
+      ],
+      "default": "user",
+      "description": "User role within the ASOSINT/PHD Hub ecosystem"
+    },
+    "subscription_tier": {
+      "type": "string",
+      "enum": [
+        "community",
+        "pro",
+        "enterprise",
+        "gov"
+      ],
+      "default": "community"
+    },
+    "hub_identity": {
+      "type": "object",
+      "description": "PHD Hub cross-app identity record \u2014 readable by all dojo ecosystem apps",
+      "properties": {
+        "hub_user_id": {
+          "type": "string",
+          "description": "Stable identity token shared across PHD Hub apps"
+        },
+        "registered_apps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of PHD Hub apps this user is enrolled in (e.g. asosint, cyberdojosensai)"
+        },
+        "primary_app": {
+          "type": "string",
+          "description": "The app the user primarily operates in"
+        },
+        "cross_app_read_enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Grants PHD Hub identity recognition across the dojo ecosystem"
+        },
+        "last_seen_app": {
+          "type": "string",
+          "description": "Most recently active PHD Hub app"
+        },
+        "last_seen_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "suspended",
+        "pending"
+      ],
+      "default": "active"
+    },
+    "organization": {
+      "type": "string",
+      "description": "Organization or agency affiliation"
+    },
+    "clearance_level": {
+      "type": "string",
+      "enum": [
+        "unclassified",
+        "sensitive",
+        "confidential",
+        "secret"
+      ],
+      "default": "unclassified"
+    },
+    "notification_preferences": {
+      "type": "object",
+      "properties": {
+        "email_alerts": {
+          "type": "boolean",
+          "default": true
+        },
+        "discord_alerts": {
+          "type": "boolean",
+          "default": false
+        },
+        "critical_only": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    }
+  }
+}
